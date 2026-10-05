@@ -1,5 +1,6 @@
 plugins {
 	id("dev.kikugie.loom-back-compat")
+	id("me.modmuss50.mod-publish-plugin")
 }
 
 val mc = stonecutter.current.version
@@ -57,6 +58,25 @@ tasks.register<Copy>("collectJar") {
 	group = "build"
 	from(loomx.modJar.map { it.archiveFile })
 	into(rootProject.layout.buildDirectory.dir("libs"))
+}
+
+publishMods {
+	file = loomx.modJar.flatMap { it.archiveFile }
+	displayName = "${property("mod.name")} ${property("mod.version")} (Fabric $mc)"
+	version = project.version.toString()
+	changelog = providers.gradleProperty("changelog").orElse(rootProject.file("CHANGELOG.md").readText())
+	type = if (findProperty("publish.type") == "beta") BETA else STABLE
+	modLoaders.add("fabric")
+	// no token -> only prints what it would upload
+	dryRun = !hasProperty("modrinth.token") && System.getenv("MODRINTH_TOKEN") == null
+
+	modrinth {
+		accessToken = providers.gradleProperty("modrinth.token").orElse(providers.environmentVariable("MODRINTH_TOKEN"))
+		projectId = property("publish.modrinth_id") as String
+		minecraftVersions.addAll((property("publish.mc_targets") as String).split(" "))
+		requires("fabric-api")
+		optional("modmenu")
+	}
 }
 
 // the client gametest API only exists on newer versions. On 1.21.11 the test harness never

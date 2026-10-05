@@ -1,5 +1,6 @@
 plugins {
 	id("net.neoforged.moddev")
+	id("me.modmuss50.mod-publish-plugin")
 }
 
 val mc = stonecutter.current.version
@@ -61,4 +62,21 @@ tasks.register<Copy>("collectJar") {
 	group = "build"
 	from(tasks.jar.map { it.archiveFile })
 	into(rootProject.layout.buildDirectory.dir("libs"))
+}
+
+publishMods {
+	file = tasks.jar.flatMap { it.archiveFile }
+	displayName = "${property("mod.name")} ${property("mod.version")} (NeoForge $mc)"
+	version = project.version.toString()
+	changelog = providers.gradleProperty("changelog").orElse(rootProject.file("CHANGELOG.md").readText())
+	type = if (findProperty("publish.type") == "beta") BETA else STABLE
+	modLoaders.add("neoforge")
+	// no token -> only prints what it would upload
+	dryRun = !hasProperty("modrinth.token") && System.getenv("MODRINTH_TOKEN") == null
+
+	modrinth {
+		accessToken = providers.gradleProperty("modrinth.token").orElse(providers.environmentVariable("MODRINTH_TOKEN"))
+		projectId = property("publish.modrinth_id") as String
+		minecraftVersions.addAll((property("publish.mc_targets") as String).split(" "))
+	}
 }
