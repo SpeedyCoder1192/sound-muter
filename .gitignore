@@ -41,3 +41,6 @@ replay_*.log
 
 # private notes
 TODO.md
+
+# local scratch images
+*-untrack.png
