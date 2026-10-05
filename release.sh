@@ -6,6 +6,13 @@ cd "$(dirname "$0")"
 
 repo="SpeedyCoder1192/sound-muter"
 
+# Gradle needs Java 25; use the one in ~/.jdks if nothing else is set up
+if [ -z "${JAVA_HOME:-}" ] && ! command -v java >/dev/null; then
+	JAVA_HOME=$(ls -d ~/.jdks/jdk-25* 2>/dev/null | tail -1)
+	[ -n "$JAVA_HOME" ] || { echo "No Java found. Install JDK 25 or set JAVA_HOME."; exit 1; }
+	export JAVA_HOME
+fi
+
 command -v gh >/dev/null || { echo "GitHub CLI (gh) isn't installed."; exit 1; }
 GITHUB_TOKEN="$(gh auth token 2>/dev/null)" || { echo "gh isn't logged in, run: gh auth login"; exit 1; }
 export GITHUB_TOKEN
@@ -42,6 +49,15 @@ for p in "${picks[@]}"; do
 	chosen+=("${nodes[$((p - 1))]}")
 done
 
+for node in "${chosen[@]}"; do
+	if grep -qxF "$version+$node" <<<"$released"; then
+		echo "$node is already released. To replace it, delete the old one first:"
+		echo "  Modrinth: project page -> Versions -> $version+$node -> Delete"
+		echo "  GitHub:   gh release delete '$version+$node' --repo $repo --cleanup-tag --yes"
+		exit 1
+	fi
+done
+
 echo
 echo "Upload to:"
 echo "  1) Modrinth + GitHub"
@@ -71,6 +87,11 @@ args=()
 for node in "${chosen[@]}"; do
 	echo
 	echo "== $node"
+	# a tag left behind by a deleted release would point the new release at old code
+	if [ "$task" != publishModrinth ] && gh api "repos/$repo/git/refs/tags/$version+$node" >/dev/null 2>&1; then
+		echo "removing leftover tag $version+$node"
+		gh api -X DELETE "repos/$repo/git/refs/tags/$version+$node" >/dev/null
+	fi
 	if ! ./gradlew --console=plain -q ":$node:$task" "${args[@]}"; then
 		echo "Failed on $node, stopping here. Anything listed above it went through."
 		exit 1
