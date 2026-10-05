@@ -51,6 +51,12 @@ tasks.named("createMinecraftArtifacts") {
 	dependsOn(tasks.named("stonecutterGenerate"))
 }
 
+tasks.jar {
+	from(rootProject.file("LICENSE")) {
+		rename { "${it}_$modId" }
+	}
+}
+
 tasks.register<Copy>("collectJar") {
 	group = "build"
 	from(tasks.jar.map { it.archiveFile })

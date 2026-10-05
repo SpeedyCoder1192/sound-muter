@@ -47,6 +47,12 @@ tasks.processResources {
 	filesMatching(listOf("fabric.mod.json", "$modId.mixins.json")) { expand(props) }
 }
 
+tasks.jar {
+	from(rootProject.file("LICENSE")) {
+		rename { "${it}_$modId" }
+	}
+}
+
 tasks.register<Copy>("collectJar") {
 	group = "build"
 	from(loomx.modJar.map { it.archiveFile })
