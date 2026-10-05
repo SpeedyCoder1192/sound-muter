@@ -6,6 +6,8 @@ Got a trading hall full of villagers going "hmm" all day? A chicken farm under y
 
 It's client-side only, so it works on any server, vanilla ones included. It only changes what you hear and doesn't add or reveal anything the server didn't send you.
 
+![Searching for chicken sounds, muting one and turning it down](https://raw.githubusercontent.com/SpeedyCoder1192/sound-muter/main/docs/demo.gif)
+
 ## How it works
 
 Open the menu with a keybind (or from Mod Menu on Fabric, or the Mods list on NeoForge). You get:
@@ -16,9 +18,13 @@ Open the menu with a keybind (or from Mod Menu on Fabric, or the Mods list on Ne
 
 Each sound has a Mute button, a volume slider (0-100%) and a ▶ button to hear it. The search box matches both the subtitle text ("Villager mumbles") and the sound id (`entity.villager.ambient`).
 
+![The Sound Muter menu](https://raw.githubusercontent.com/SpeedyCoder1192/sound-muter/main/docs/screen.png)
+
 ## Mute last sound
 
 There's also a "Mute last sound" key. Hear something annoying, press it, done. A small popup tells you what got muted, and pressing the key again within 5 seconds undoes it.
+
+![Popup after pressing the mute key](https://raw.githubusercontent.com/SpeedyCoder1192/sound-muter/main/docs/mute-last.png)
 
 Both keys are unbound by default. Set them in Options > Controls > Key Binds under "Sound Muter".
 
