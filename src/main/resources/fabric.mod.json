@@ -5,6 +5,10 @@
 	"name": "Sound Muter",
 	"description": "Mute or turn down individual sounds. Client-side, works on any server.",
 	"authors": ["SpeedyCoder1192"],
+	"contact": {
+		"sources": "https://github.com/SpeedyCoder1192/sound-muter",
+		"issues": "https://github.com/SpeedyCoder1192/sound-muter/issues"
+	},
 	"environment": "client",
 	"entrypoints": {
 		"client": [

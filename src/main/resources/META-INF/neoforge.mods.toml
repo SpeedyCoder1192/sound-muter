@@ -1,12 +1,14 @@
 modLoader = "javafml"
 loaderVersion = "[1,)"
 license = "All Rights Reserved"
+issueTrackerURL = "https://github.com/SpeedyCoder1192/sound-muter/issues"
 
 [[mods]]
 modId = "soundmuter"
 version = "${version}"
 displayName = "Sound Muter"
 authors = "SpeedyCoder1192"
+displayURL = "https://github.com/SpeedyCoder1192/sound-muter"
 description = "Mute or turn down individual sounds. Client-side, works on any server."
 
 [[mixins]]

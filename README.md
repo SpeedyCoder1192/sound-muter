@@ -1,3 +1,5 @@
+# Sound Muter
+
 Mute or turn down single sounds instead of a whole volume category.
 
 Got a trading hall full of villagers going "hmm" all day? A chicken farm under your base? Mute just those and keep every other sound the way it was.
@@ -33,4 +35,16 @@ Both keys are unbound by default. Set them in Options > Controls > Key Binds und
 
 Works on 1.20.1, 1.21.1, 1.21.9-1.21.11 and 26.1-26.3 (no NeoForge build for 1.20.1).
 
-Bugs or ideas? Open an issue.
+Bugs or ideas? [Open an issue](https://github.com/SpeedyCoder1192/sound-muter/issues).
+
+## Building
+
+Needs Java 25 to run Gradle (older Java versions for the older Minecraft builds get downloaded automatically).
+
+```
+./gradlew buildAll
+```
+
+The jars end up in `build/libs/`. One codebase covers every version through [Stonecutter](https://stonecutter.kikugie.dev/);
+version-specific settings are in `versions/<minecraft>-<loader>/gradle.properties`.
+To run one version: `./gradlew :1.21.1-fabric:runClient` (or any other folder name in `versions/`).
