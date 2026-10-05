@@ -73,6 +73,8 @@ publishMods {
 	modrinth {
 		accessToken = providers.gradleProperty("modrinth.token").orElse(providers.environmentVariable("MODRINTH_TOKEN"))
 		projectId = property("publish.modrinth_id") as String
+		// only needed on the player's side, servers don't need it
+		environment = CLIENT_ONLY
 		minecraftVersions.addAll((property("publish.mc_targets") as String).split(" "))
 		requires("fabric-api")
 		optional("modmenu")
