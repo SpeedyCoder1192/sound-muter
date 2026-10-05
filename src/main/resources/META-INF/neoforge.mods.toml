@@ -1,0 +1,20 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "All Rights Reserved"
+
+[[mods]]
+modId = "soundmuter"
+version = "${version}"
+displayName = "Sound Muter"
+authors = "SpeedyCoder1192"
+description = "Mute or turn down individual sounds. Client-side, works on any server."
+
+[[mixins]]
+config = "soundmuter.mixins.json"
+
+[[dependencies.soundmuter]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft}"
+ordering = "NONE"
+side = "CLIENT"

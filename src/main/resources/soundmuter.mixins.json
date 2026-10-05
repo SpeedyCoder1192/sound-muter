@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "dev.soundmuter.mixin",
+	"compatibilityLevel": "JAVA_${java}",
+	"client": [
+		"SoundEngineMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

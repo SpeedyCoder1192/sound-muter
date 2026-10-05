@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "soundmuter",
+	"version": "${version}",
+	"name": "Sound Muter",
+	"description": "Mute or turn down individual sounds. Client-side, works on any server.",
+	"authors": ["SpeedyCoder1192"],
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"dev.soundmuter.platform.fabric.SoundMuterFabric"
+		],
+		"modmenu": [
+			"dev.soundmuter.platform.fabric.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"soundmuter.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "${minecraft}",
+		"java": ">=${java}",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"key.category.soundmuter.main": "Sound Muter",
+	"key.soundmuter.open": "Open Sound Muter",
+	"key.soundmuter.mute_last": "Mute last sound",
+
+	"soundmuter.title": "Sound Muter",
+	"soundmuter.search": "Search sounds",
+	"soundmuter.section.recent": "Recently heard",
+	"soundmuter.section.changed": "Muted / changed",
+	"soundmuter.section.all": "All sounds",
+	"soundmuter.mute": "Mute",
+	"soundmuter.unmute": "Unmute",
+	"soundmuter.muted": "Muted",
+	"soundmuter.preview": "Preview",
+	"soundmuter.reset_all": "Reset all",
+	"soundmuter.reset_all.title": "Reset all sounds?",
+	"soundmuter.reset_all.message": "Every sound goes back to 100%.",
+	"soundmuter.nothing_heard": "Nothing heard yet",
+
+	"soundmuter.toast.muted": "Muted %s",
+	"soundmuter.toast.unmuted": "Unmuted %s",
+	"soundmuter.toast.undo": "Press again to undo"
+}
